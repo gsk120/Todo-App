@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Todo - 오늘의 할 일 관리</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container" id="app">
+        <!-- Header 영역 -->
+        <header class="app-header" id="header">
+            <h1 class="service-title" id="service-title">Daily Todo</h1>
+            <p class="service-description" id="service-description">오늘의 할 일 관리</p>
+        </header>
+
+        <main class="app-main" id="main-content">
+            <!-- Dashboard 영역 -->
+            <section class="dashboard-section" id="dashboard-section" aria-labelledby="dashboard-heading">
+                <h2 id="dashboard-heading" class="visually-hidden">할 일 현황 대시보드</h2>
+                <div class="dashboard-stats" id="dashboard-stats">
+                    <div class="stat-card" id="stat-total">
+                        <span class="stat-label">전체 할 일</span>
+                        <strong class="stat-value" id="total-count" aria-live="polite">0</strong>
+                    </div>
+                    <div class="stat-card" id="stat-completed">
+                        <span class="stat-label">완료된 할 일</span>
+                        <strong class="stat-value" id="completed-count" aria-live="polite">0</strong>
+                    </div>
+                    <div class="stat-card" id="stat-pending">
+                        <span class="stat-label">미완료 할 일</span>
+                        <strong class="stat-value" id="pending-count" aria-live="polite">0</strong>
+                    </div>
+                </div>
+
+                <!-- 전체 진행률 표시 및 Progress Bar 영역 -->
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-label" id="progress-label">전체 진행률</span>
+                        <span class="progress-percentage" id="progress-percentage" aria-live="polite">0%</span>
+                    </div>
+                    <div
+                        class="progress-bar-track"
+                        id="progress-bar-track"
+                        role="progressbar"
+                        aria-labelledby="progress-label"
+                        aria-valuenow="0"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+                        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Todo 입력 영역 -->
+            <section class="todo-input-section" id="todo-input-section" aria-labelledby="todo-input-heading">
+                <h2 id="todo-input-heading" class="visually-hidden">새 할 일 등록</h2>
+                <form class="todo-form" id="todo-form" novalidate>
+                    <div class="input-group">
+                        <label for="todo-title-input" class="visually-hidden">할 일 제목</label>
+                        <input
+                            type="text"
+                            id="todo-title-input"
+                            class="todo-title-input"
+                            name="todoTitle"
+                            placeholder="오늘 할 일을 입력하세요"
+                            autocomplete="off"
+                            required
+                            aria-required="true"
+                        >
+                    </div>
+
+                    <div class="control-group">
+                        <div class="category-selector" id="category-selector" role="group" aria-label="카테고리 선택">
+                            <button
+                                type="button"
+                                class="category-btn active"
+                                id="category-btn-personal"
+                                data-category="개인"
+                                aria-pressed="true"
+                            >
+                                개인
+                            </button>
+                            <button
+                                type="button"
+                                class="category-btn"
+                                id="category-btn-work"
+                                data-category="업무"
+                                aria-pressed="false"
+                            >
+                                업무
+                            </button>
+                        </div>
+
+                        <button type="button" class="add-todo-btn" id="add-todo-btn" aria-label="할 일 추가">
+                            추가
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Todo 목록 영역 -->
+            <section class="todo-list-section" id="todo-list-section" aria-labelledby="todo-list-heading">
+                <h2 id="todo-list-heading" class="visually-hidden">할 일 목록</h2>
+
+                <!-- 등록된 할 일 목록 -->
+                <ul class="todo-list" id="todo-list" aria-live="polite">
+                    <!-- 화면 구조 확인용 기본 샘플 아이템 (추후 JS에서 동적 렌더링) -->
+                    <li class="todo-item" data-id="sample-1" data-category="개인">
+                        <div class="todo-item-left">
+                            <input
+                                type="checkbox"
+                                class="todo-checkbox"
+                                id="todo-check-sample-1"
+                                aria-label="할 일 완료 여부 선택"
+                            >
+                            <label for="todo-check-sample-1" class="todo-title">샘플 할 일 항목입니다</label>
+                            <span class="category-badge badge-personal" data-category="개인">개인</span>
+                        </div>
+                        <div class="todo-item-actions">
+                            <button type="button" class="edit-todo-btn" aria-label="할 일 수정">수정</button>
+                            <button type="button" class="delete-todo-btn" aria-label="할 일 삭제">삭제</button>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Empty State 영역 -->
+                <div class="empty-state" id="empty-state" role="status" aria-live="polite">
+                    <p class="empty-state-message" id="empty-state-message">
+                        등록된 할 일이 없습니다. 새로운 할 일을 추가해 보세요!
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="js/storage.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,830 @@
+/* ==========================================================================
+   1. CSS Variables (:root) - Notion & Modern SaaS Design System
+   ========================================================================== */
+:root {
+    /* Colors - Background & Surface */
+    --bg-page: #f7f7f5;
+    --bg-surface: #ffffff;
+    --bg-surface-subtle: #fbfbfa;
+    --bg-surface-hover: #f1f1ef;
+    --bg-input: #ffffff;
+
+    /* Colors - Text (High Readability) */
+    --text-primary: #191919;
+    --text-secondary: #5a5a57;
+    --text-muted: #9b9a97;
+    --text-completed: #a8a7a3;
+    --text-inverse: #ffffff;
+
+    /* Colors - Brand & Primary Accent */
+    --color-primary: #2383e2;
+    --color-primary-hover: #1b6ec2;
+    --color-primary-soft: rgba(35, 131, 226, 0.12);
+
+    /* Colors - Semantic Status & Category Badges */
+    --color-success: #0f7b6c;
+    --color-danger: #e03e3e;
+    --color-danger-bg: #fbe4e4;
+
+    /* Category Badge: 개인 (Personal) & 업무 (Work) */
+    --badge-personal-bg: #eef3ff;
+    --badge-personal-text: #2850b8;
+    --badge-personal-border: #d6e2ff;
+
+    --badge-work-bg: #f4eefc;
+    --badge-work-text: #6938b3;
+    --badge-work-border: #e4d5f9;
+
+    /* Borders & Dividers */
+    --border-color: #e9e9e7;
+    --border-strong: #d4d4d0;
+    --border-focus: #2383e2;
+
+    /* Spacing Scale */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;  /* 40px */
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-pill: 9999px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(15, 15, 15, 0.04);
+    --shadow-sm: 0 2px 8px rgba(15, 15, 15, 0.05), 0 1px 2px rgba(15, 15, 15, 0.03);
+    --shadow-focus: 0 0 0 3px var(--color-primary-soft);
+
+    /* Typography */
+    --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+
+    /* Layout - 와이드 데스크톱 대응 최대 폭 */
+    --container-max-width: 1440px;
+
+    /* Subtle Transitions */
+    --transition-fast: 150ms ease;
+}
+
+/* ==========================================================================
+   2. Reset & Base Styles
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8) var(--space-6);
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+/* Accessibility Utility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   3. Layout Container
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    flex: 1 1 auto;
+}
+
+/* Shared Section Card Base */
+.dashboard-section,
+.todo-input-section,
+.todo-list-section {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   4. Header Area
+   ========================================================================== */
+.app-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-1);
+}
+
+.service-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    line-height: 1.25;
+}
+
+.service-description {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   5. Dashboard Area (Stats Cards & Progress Bar)
+   ========================================================================== */
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.stat-card {
+    background-color: var(--bg-surface-subtle);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+#stat-total .stat-value {
+    color: var(--text-primary);
+}
+
+#stat-completed .stat-value {
+    color: var(--color-success);
+}
+
+#stat-pending .stat-value {
+    color: var(--color-primary);
+}
+
+/* Progress Bar Area */
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-1);
+}
+
+.progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.progress-percentage {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.progress-bar-track {
+    width: 100%;
+    height: 12px;
+    background-color: var(--bg-surface-hover);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4f9cf9 0%, var(--color-primary) 100%);
+    border-radius: var(--radius-pill);
+    transition: width 250ms ease;
+}
+
+/* ==========================================================================
+   6. Shared Button & Input Base Styles
+   ========================================================================== */
+.todo-title-input,
+.edit-todo-input {
+    width: 100%;
+    height: 46px;
+    padding: 0 var(--space-4);
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.todo-title-input::placeholder {
+    color: var(--text-muted);
+}
+
+.todo-title-input:focus,
+.edit-todo-input:focus {
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-focus);
+}
+
+.category-btn,
+.add-todo-btn,
+.edit-todo-btn,
+.delete-todo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.category-btn:focus-visible,
+.add-todo-btn:focus-visible,
+.edit-todo-btn:focus-visible,
+.delete-todo-btn:focus-visible,
+.todo-checkbox:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+}
+
+/* ==========================================================================
+   7. Todo Input Area
+   ========================================================================== */
+.todo-form {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.input-group {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+}
+
+/* Category Selector Segmented Group */
+.category-selector {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--bg-surface-hover);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    height: 46px;
+}
+
+.category-btn {
+    height: 36px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.category-btn:hover {
+    color: var(--text-primary);
+}
+
+.category-btn:active {
+    background-color: var(--border-color);
+}
+
+.category-btn.active,
+.category-btn[aria-pressed="true"] {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    font-weight: 600;
+    box-shadow: var(--shadow-xs);
+}
+
+/* Primary Add Button */
+.add-todo-btn {
+    height: 46px;
+    padding: 0 var(--space-6);
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+}
+
+.add-todo-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.add-todo-btn:active {
+    background-color: #165ba3;
+}
+
+/* ==========================================================================
+   8. Todo List Area & Todo Item States
+   ========================================================================== */
+.todo-list-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    flex: 1 1 auto;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.todo-item:hover {
+    border-color: var(--border-strong);
+    background-color: var(--bg-surface-subtle);
+}
+
+.todo-item-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.todo-item-left .edit-todo-input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Checkbox Styling */
+.todo-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+
+/* Todo Title (긴 제목 줄바꿈 및 레이아웃 깨짐 방지) */
+.todo-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.975rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+    transition: color var(--transition-fast);
+}
+
+/* Category Badge Styling (개인 vs 업무) */
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+.category-badge.badge-personal,
+.category-badge[data-category="개인"] {
+    background-color: var(--badge-personal-bg);
+    color: var(--badge-personal-text);
+    border-color: var(--badge-personal-border);
+}
+
+.category-badge.badge-work,
+.category-badge[data-category="업무"] {
+    background-color: var(--badge-work-bg);
+    color: var(--badge-work-text);
+    border-color: var(--badge-work-border);
+}
+
+/* Todo Item Action Buttons (수정 / 삭제 / 저장 / 취소) */
+.todo-item-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+}
+
+.edit-todo-btn,
+.delete-todo-btn {
+    height: 34px;
+    padding: 0 var(--space-3);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.edit-todo-btn:hover {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.edit-todo-btn:active {
+    background-color: var(--border-color);
+}
+
+.delete-todo-btn:hover {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+    border-color: rgba(224, 62, 62, 0.3);
+}
+
+.delete-todo-btn:active {
+    background-color: #f5d0d0;
+}
+
+/* 수정 모드 내 저장(Primary) 및 취소(Neutral) 버튼 구분 */
+.edit-todo-btn[data-action="save"] {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-inverse);
+}
+
+.edit-todo-btn[data-action="save"]:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    color: var(--text-inverse);
+}
+
+.edit-todo-btn[data-action="save"]:active {
+    background-color: #165ba3;
+}
+
+.delete-todo-btn[data-action="cancel"]:hover {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.delete-todo-btn[data-action="cancel"]:active {
+    background-color: var(--border-color);
+}
+
+/* Completed Todo Visual Distinction */
+.todo-item.completed,
+.todo-item:has(.todo-checkbox:checked) {
+    background-color: var(--bg-surface-subtle);
+    border-color: var(--border-color);
+}
+
+.todo-item.completed .todo-title,
+.todo-checkbox:checked + .todo-title,
+.todo-item:has(.todo-checkbox:checked) .todo-title {
+    text-decoration: line-through;
+    color: var(--text-completed);
+}
+
+.todo-item.completed .category-badge,
+.todo-item:has(.todo-checkbox:checked) .category-badge {
+    opacity: 0.65;
+}
+
+/* ==========================================================================
+   9. Empty State & Hidden State Handling
+   ========================================================================== */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-10) var(--space-4);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-surface-subtle);
+    flex: 1 1 auto;
+}
+
+.todo-list[hidden],
+.empty-state[hidden] {
+    display: none;
+}
+
+.empty-state-message {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   10. Responsive Design Breakpoints (Desktop Wide / Tablet / Mobile)
+   ========================================================================== */
+
+/* Desktop: 1024px 이상 - 와이드 화면 전체를 활용하는 2열 SaaS 대시보드 레이아웃 */
+@media (min-width: 1024px) {
+    body {
+        padding: var(--space-8) var(--space-10);
+    }
+
+    .app-container {
+        max-width: var(--container-max-width);
+        min-height: calc(100vh - 4rem);
+        gap: var(--space-6);
+    }
+
+    /* 데스크톱 상단 헤더 바: 가로 와이드 배치 */
+    .app-header {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 0 var(--space-1) var(--space-4) var(--space-1);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 데스크톱 메인 영역: 좌측 Dashboard 패널 + 우측 입력/목록 워크스페이스 2열 Grid */
+    .app-main {
+        display: grid;
+        grid-template-columns: minmax(340px, 400px) minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        gap: var(--space-6);
+        align-items: stretch;
+    }
+
+    /* 좌측 컬럼: 대시보드 요약 패널 */
+    .dashboard-section {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        align-self: start;
+        position: sticky;
+        top: var(--space-8);
+        padding: var(--space-6);
+        gap: var(--space-6);
+    }
+
+    /* 좌측 대시보드 패널 내부 통계 카드를 큼직하게 배치 */
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+
+    .stat-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-5) var(--space-6);
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+
+    /* 우측 컬럼 상단: 할 일 입력 바 */
+    .todo-input-section {
+        grid-column: 2;
+        grid-row: 1;
+        padding: var(--space-5) var(--space-6);
+    }
+
+    /* 우측 컬럼 하단: 할 일 목록 메인 워크스페이스 */
+    .todo-list-section {
+        grid-column: 2;
+        grid-row: 2;
+        min-height: 480px;
+        padding: var(--space-6);
+    }
+
+    .empty-state {
+        min-height: 400px;
+    }
+}
+
+/* Large Desktop: 1360px 이상 - 대화면 모니터에서 더 넓은 여백과 통계 카드 구성 */
+@media (min-width: 1360px) {
+    :root {
+        --container-max-width: 1600px;
+    }
+
+    .app-main {
+        grid-template-columns: 440px minmax(0, 1fr);
+        gap: var(--space-8);
+    }
+}
+
+/* Tablet: 768px ~ 1023px - 태블릿 전체 화면 폭 활용 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        padding: var(--space-6) var(--space-6);
+    }
+
+    .app-container {
+        max-width: 100%;
+    }
+
+    .dashboard-section,
+    .todo-input-section,
+    .todo-list-section {
+        padding: var(--space-5);
+    }
+
+    .empty-state {
+        min-height: 260px;
+    }
+}
+
+/* Mobile: 767px 이하 - 모바일 세로 스택 최적화 */
+@media (max-width: 767px) {
+    body {
+        padding: var(--space-5) var(--space-4);
+    }
+
+    .app-container,
+    .app-main {
+        gap: var(--space-4);
+    }
+
+    .service-title {
+        font-size: 1.5rem;
+    }
+
+    .service-description {
+        font-size: 0.875rem;
+    }
+
+    .dashboard-section,
+    .todo-input-section,
+    .todo-list-section {
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+    }
+
+    /* 모바일 통계 카드 재배치: 1열 가로 행 형태 */
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+
+    .stat-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+    }
+
+    /* 모바일 입력 영역 자연스러운 세로 재배치 */
+    .todo-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+    }
+
+    .control-group {
+        width: 100%;
+        justify-content: space-between;
+        gap: var(--space-2);
+    }
+
+    .category-selector {
+        flex: 1 1 auto;
+    }
+
+    .category-btn {
+        flex: 1 1 50%;
+    }
+
+    .add-todo-btn {
+        flex: 0 0 auto;
+        padding: 0 var(--space-5);
+    }
+
+    /* 모바일 Todo 목록 항목 재배치 */
+    .todo-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .todo-item-left {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .todo-item-left .edit-todo-input {
+        flex: 1 1 calc(100% - 34px);
+    }
+
+    .todo-item-left .category-selector {
+        width: 100%;
+    }
+
+    .todo-item-actions {
+        width: 100%;
+        justify-content: flex-end;
+        padding-top: var(--space-2);
+        border-top: 1px solid var(--border-color);
+    }
+}
